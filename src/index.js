@@ -1,15 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React,{useState} from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Note from "./components/Note"
+import Footer from "./components/Footer"
 import reportWebVitals from './reportWebVitals';
+import CreateArea from "./components/CreateArea"
+function Main(info){
+  const [data,changeData] = useState([])
+function addData(info){
+  
+  changeData([...data,info])
+}
+function deletedata(idx){
+  changeData(data.filter((val,i)=>i!==idx))
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
+}
+
+    return <div>
     <App />
-  </React.StrictMode>
-);
+    <div>
+        <CreateArea chData={addData} />
+        <Note details={data} delete={deletedata} info={data} />
+      </div>
+    <Footer />
+  </div>
+}
+ReactDOM.render(
+ <Main /> ,document.getElementById("root"))
+
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
